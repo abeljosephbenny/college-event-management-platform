@@ -1,64 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>MakeMyEvent</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script defer src="js/script.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Make My Event</title>
+<link rel="stylesheet" href="css/home_style.css">
 </head>
+
 <body>
 
-    <nav class="navbar">
-    <div class="logo">MakeMyEvent</div>
+<!-- NAVBAR -->
+<header class="navbar">
 
-    <ul class="nav-links">
-        <li><a href="home.html">Home</a></li>
-        <li><a href="AllEventsByCategory.html">Events</a></li>
-    </ul>
+    <div class="nav-left">
+        <img src="images/logo.png" class="logo" alt="Logo">
 
-    <div class="auth-buttons">
-        <a href="signin.html" class="btn-secondary">Sign In</a>
-        <a href="signup.html" class="btn-primary">Sign Up</a>
+        <input type="text"
+        placeholder="Search for Events Activities">
     </div>
-</nav>
 
-   <section class="hero">
-    <div class="particles"></div>
-    <h1 class="shine-text">
-        Discover & Manage Campus Events Seamlessly
-    </h1>
-    <p>Your all-in-one college event discovery and management platform.</p>
-    <a href="#events" class="btn-primary">Explore Events</a>
-</section>
-   <section id="events" class="events-section reveal">
-    <h2>Trending Events</h2>
-    <div class="events-container" id="eventsContainer"></div>
-</section>
-<section class="organizer-section">
-    <h2>Organizer Panel</h2>
-    <button class="btn-primary" onclick="openForm()">Create Event</button>
+    <div class="nav-right">
 
-    <div id="myEvents" class="events-container"></div>
-</section>
-<section class="admin-section">
-    <h2>Admin Approval Panel</h2>
-    <div id="adminEvents" class="events-container"></div>
-</section>
+        <a href="#">Create Event</a>
+        <a href="#">Calendar</a>
+        <a href="#">Announcements</a>
+        <a href="#">Help / FAQ</a>
 
-    <footer>
-        <p>© 2026 MakeMyEvent. Built for modern campuses.</p>
-    </footer>
-    <div id="eventFormModal" class="modal">
-    <div class="modal-content">
-        <h3>Create Event</h3>
-        <input type="text" id="eventTitle" placeholder="Event Title">
-        <input type="text" id="eventDate" placeholder="Event Date">
-        <textarea id="eventDesc" placeholder="Event Description"></textarea>
-        <button onclick="submitEvent()">Submit</button>
-        <button onclick="closeForm()">Cancel</button>
+        <!-- <a href="#" class="login">Login</a>
+        <a href="#" class="signup">Signup</a> -->
+
+        <div class="profile">
+            <img src="images/profile.jpg" alt="Profile">
+        </div>
+
     </div>
+
+</header>
+
+<!-- CATEGORY MENU -->
+<!-- <nav class="menu">
+<ul>
+<li>Movies</li>
+<li>Stream</li>
+<li>Events</li>
+<li>Plays</li>
+<li>Sports</li>
+<li>Activities</li>
+</ul>
+</nav> -->
+
+<!-- HERO BANNER -->
+<section class="banner">
+<img src="banner.jpg">
+</section>
+
+<!-- RECOMMENDED MOVIES -->
+<section class="section">
+<div class="section-header">
+<h2>Recommended Movies</h2>
+<span>See All</span>
 </div>
+
+<div class="movie-grid">
+
+<div class="movie-card">
+<img src="movie1.jpg">
+<h3>Tu Yaa Main</h3>
+<p>Adventure/Thriller</p>
+</div>
+
+<div class="movie-card">
+<img src="movie2.jpg">
+<h3>Prakambanam</h3>
+<p>Comedy/Horror</p>
+</div>
+
+<div class="movie-card">
+<img src="movie3.jpg">
+<h3>Ashakal Aayiram</h3>
+<p>Drama</p>
+</div>
+
+<div class="movie-card">
+<img src="movie4.jpg">
+<h3>Sukhamano Sukhamann</h3>
+<p>Comedy/Fantasy</p>
+</div>
+
+<div class="movie-card">
+<img src="movie5.jpg">
+<h3>Anomie</h3>
+<p>Sci-Fi/Thriller</p>
+</div>
+
+</div>
+</section>
+
+<!-- LIVE EVENTS -->
+<section class="section events">
+
+<div class="section-header">
+<h2>The Best of Live Events</h2>
+</div>
+
+<div class="event-grid">
+
+<div class="event-card">
+<img src="event1.jpg">
+<p>Music Shows</p>
+</div>
+
+<div class="event-card">
+<img src="event2.jpg">
+<p>Comedy Shows</p>
+</div>
+
+<div class="event-card">
+<img src="event3.jpg">
+<p>Workshops</p>
+</div>
+
+<div class="event-card">
+<img src="event4.jpg">
+<p>Kids Events</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- MOVIES NOW SHOWING -->
+<section class="section">
+<div class="section-header">
+<h2>Movies Now Showing in Kochi</h2>
+</div>
+
+<div class="movie-grid">
+
+<div class="movie-card">
+<img src="movie6.jpg">
+<h3>Pennum Porattum</h3>
+</div>
+
+<div class="movie-card">
+<img src="movie7.jpg">
+<h3>Premam</h3>
+</div>
+
+<div class="movie-card">
+<img src="movie8.jpg">
+<h3>O Romeo</h3>
+</div>
+
+<div class="movie-card">
+<img src="movie9.jpg">
+<h3>Spa</h3>
+</div>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+
+<div class="footer-container">
+
+<div class="footer-logo">
+<h2>BookMyShow</h2>
+<p>Copyright © 2026</p>
+</div>
+
+<div class="footer-links">
+<p>List your Show</p>
+<p>Contact</p>
+<p>Privacy Policy</p>
+<p>Help</p>
+</div>
+
+<div class="newsletter">
+<p>Subscribe to Newsletter</p>
+<input type="email" placeholder="Enter email">
+<button>Subscribe</button>
+</div>
+
+</div>
+
+</footer>
 
 </body>
 </html>
