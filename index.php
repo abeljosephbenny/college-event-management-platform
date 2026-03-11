@@ -1,0 +1,1 @@
+<?php // Homepage (Categorized events) ?>

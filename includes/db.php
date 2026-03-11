@@ -1,0 +1,1 @@
+<?php // PDO database connection ?>

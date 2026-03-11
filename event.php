@@ -1,0 +1,1 @@
+<?php // Event detail page ?>
