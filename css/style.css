@@ -462,3 +462,30 @@ button {
 button:hover {
     opacity: 0.9;
 }
+.auth-buttons{
+    display:flex;
+    gap:12px;
+}
+
+.btn-secondary{
+    padding:8px 16px;
+    border:1px solid #3b82f6;
+    border-radius:8px;
+    color:#3b82f6;
+    text-decoration:none;
+}
+.category-row{
+    display:flex;
+    gap:20px;
+    overflow-x:auto;
+    padding:20px 0;
+}
+
+.category-row::-webkit-scrollbar{
+    height:6px;
+}
+
+.category-row::-webkit-scrollbar-thumb{
+    background:#3b82f6;
+    border-radius:6px;
+}
