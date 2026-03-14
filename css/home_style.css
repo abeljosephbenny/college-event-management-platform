@@ -8,8 +8,15 @@ font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body{
-background:#f5f5f5;
 padding-top:90px;
+background:linear-gradient(135deg,#f9fafb,#f3f0ff,#ede9fe);
+min-height:100vh;
+color:#1f2937;
+}
+
+a{
+text-decoration:none;
+color:inherit;
 }
 
 
@@ -27,13 +34,15 @@ align-items:center;
 
 padding:15px 60px;
 
-background:white;
-box-shadow:0 3px 12px rgba(0,0,0,0.08);
+background:#9584b3;
+
+box-shadow:0 6px 25px rgba(0,0,0,0.15);
+
 z-index:1000;
 }
 
 
-/* LEFT NAV */
+/* NAV LEFT */
 
 .nav-left{
 display:flex;
@@ -42,9 +51,14 @@ gap:25px;
 }
 
 .logo{
-height:45px;
-width:auto;
+height:35px;
+border-radius:6px;
 cursor:pointer;
+transition:0.3s;
+}
+
+.logo:hover{
+transform:scale(1.05);
 }
 
 
@@ -52,126 +66,220 @@ cursor:pointer;
 
 .nav-left input{
 width:420px;
-padding:12px 18px;
+padding:10px 18px;
+
 border-radius:25px;
-border:1px solid #ddd;
+border:none;
+
 outline:none;
+
 font-size:14px;
+
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
+
 transition:0.3s;
 }
 
 .nav-left input:focus{
-border-color:#f84464;
-box-shadow:0 0 6px rgba(248,68,100,0.3);
+box-shadow:0 0 8px rgba(109,92,168,0.4);
 }
 
 
-/* RIGHT NAV */
+/* NAV RIGHT */
 
 .nav-right{
 display:flex;
 align-items:center;
 gap:18px;
+color:white;
 font-size:14px;
 }
 
-
-/* NAV LINKS */
-
 .nav-right a{
-text-decoration:none;
-color:#333;
-font-weight:500;
 padding:6px 8px;
-transition:0.3s;
+transition:0.25s;
 }
 
 .nav-right a:hover{
-color:#f84464;
+color:#f3f0ff;
 }
 
 
-/* LOGIN BUTTON */
+/* PROFILE */
 
-.login{
-border:1px solid #f84464;
-color:#f84464;
-border-radius:6px;
-padding:6px 14px;
+.profile{
+position:relative;
 }
-
-.login:hover{
-background:#f84464;
-color:white;
-}
-
-
-/* SIGNUP BUTTON */
-
-.signup{
-background:#f84464;
-color:white;
-border-radius:6px;
-padding:6px 14px;
-}
-
-.signup:hover{
-background:#e63656;
-}
-
-
-/* PROFILE IMAGE */
 
 .profile img{
 height:40px;
 width:40px;
 border-radius:50%;
-object-fit:cover;
 cursor:pointer;
-border:2px solid transparent;
+object-fit:cover;
+border:2px solid white;
+}
+
+
+/* DROPDOWN */
+
+.profile-dropdown{
+
+position:absolute;
+top:55px;
+right:0;
+
+width:160px;
+
+background:white;
+
+border-radius:8px;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+
+overflow:hidden;
+
+max-height:0;
+opacity:0;
+transform:translateY(-10px);
+
 transition:0.3s;
 }
 
-.profile img:hover{
-border-color:#f84464;
+.profile-dropdown.active{
+max-height:150px;
+opacity:1;
+transform:translateY(0);
+}
+
+.profile-dropdown a{
+display:block;
+padding:12px 15px;
+font-size:14px;
+border-bottom:1px solid #eee;
+}
+
+.profile-dropdown a:hover{
+background:#9584b3;
+color:white;
+}
+
+
+/* HERO BANNER */
+
+.banner{
+position:relative;
+
+max-width:1200px;
+height:380px;
+
+margin:30px auto;
+
+border-radius:12px;
+
+overflow:hidden;
+
+box-shadow:0 15px 35px rgba(0,0,0,0.2);
+}
+
+.banner img{
+width:100%;
+height:100%;
+object-fit:cover;
+
+animation:bannerZoom 12s infinite alternate;
+}
+
+
+/* OVERLAY */
+
+.banner::after{
+content:"";
+
+position:absolute;
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:linear-gradient(
+to right,
+rgba(40,30,70,0.7),
+rgba(40,30,70,0.3)
+);
+}
+
+
+/* BANNER TEXT */
+
+.banner-content{
+position:absolute;
+top:50%;
+left:60px;
+
+transform:translateY(-50%);
+
+color:white;
+z-index:2;
+
+max-width:450px;
+}
+
+.banner-content h1{
+font-size:38px;
+margin-bottom:10px;
+}
+
+.banner-content p{
+font-size:16px;
+margin-bottom:20px;
+opacity:0.9;
+}
+
+
+/* BUTTON */
+
+.banner-btn{
+
+background:#6d5ca8;
+
+border:none;
+
+padding:12px 28px;
+
+color:white;
+
+border-radius:6px;
+
+cursor:pointer;
+
+transition:0.3s;
+}
+
+.banner-btn:hover{
+background:#57458e;
 transform:scale(1.05);
 }
 
 
-/* MENU BAR */
-
-.menu{
-background:#f8f8f8;
-padding:10px 60px;
-}
-
-.menu ul{
-display:flex;
-list-style:none;
-gap:25px;
-font-weight:500;
-}
-
-
-/* BANNER */
-
-.banner img{
-width:100%;
-height:320px;
-object-fit:cover;
-}
-
-
-/* SECTION */
+/* SECTIONS */
 
 .section{
 padding:40px 60px;
+max-width:1200px;
+margin:auto;
 }
 
 .section-header{
 display:flex;
 justify-content:space-between;
-margin-bottom:20px;
+margin-bottom:25px;
+}
+
+.section-header span{
+color:#6d5ca8;
+cursor:pointer;
 }
 
 
@@ -180,20 +288,30 @@ margin-bottom:20px;
 .movie-grid{
 display:grid;
 grid-template-columns:repeat(5,1fr);
-gap:20px;
+gap:22px;
 }
 
+
+/* MOVIE CARD */
+
 .movie-card{
+
 background:white;
-border-radius:10px;
+
+border-radius:12px;
+
 overflow:hidden;
-box-shadow:0 3px 10px rgba(0,0,0,0.08);
+
+box-shadow:0 10px 25px rgba(0,0,0,0.12);
+
 cursor:pointer;
+
 transition:0.3s;
 }
 
 .movie-card:hover{
-transform:translateY(-5px);
+transform:translateY(-8px) scale(1.02);
+box-shadow:0 18px 40px rgba(0,0,0,0.2);
 }
 
 .movie-card img{
@@ -209,8 +327,8 @@ font-size:16px;
 
 .movie-card p{
 padding:0 10px 15px;
-color:#666;
 font-size:14px;
+color:#666;
 }
 
 
@@ -223,15 +341,21 @@ gap:20px;
 }
 
 .event-card{
+
 background:white;
-border-radius:10px;
+
+border-radius:12px;
+
 overflow:hidden;
-box-shadow:0 3px 10px rgba(0,0,0,0.08);
+
+box-shadow:0 10px 25px rgba(0,0,0,0.12);
+
 transition:0.3s;
 }
 
 .event-card:hover{
-transform:translateY(-5px);
+transform:translateY(-6px);
+box-shadow:0 18px 35px rgba(0,0,0,0.18);
 }
 
 .event-card img{
@@ -249,9 +373,14 @@ font-weight:500;
 /* FOOTER */
 
 .footer{
-background:#2e2e2e;
+
+background:linear-gradient(135deg,#2f2a3b,#1f1b28);
+
 color:white;
+
 padding:40px 60px;
+
+margin-top:40px;
 }
 
 .footer-container{
@@ -264,18 +393,37 @@ gap:20px;
 .newsletter input{
 padding:10px;
 border:none;
-border-radius:5px;
+border-radius:6px;
 margin-top:10px;
 }
 
 .newsletter button{
 margin-top:10px;
-padding:10px 15px;
-background:#f84464;
+padding:10px 18px;
+background:#6d5ca8;
 border:none;
 color:white;
-border-radius:5px;
+border-radius:6px;
 cursor:pointer;
+}
+
+.newsletter button:hover{
+background:#57458e;
+}
+
+
+/* BANNER ANIMATION */
+
+@keyframes bannerZoom{
+
+from{
+transform:scale(1);
+}
+
+to{
+transform:scale(1.08);
+}
+
 }
 
 
@@ -284,15 +432,11 @@ cursor:pointer;
 @media(max-width:1000px){
 
 .nav-left input{
-width:220px;
+width:200px;
 }
 
 .navbar{
 padding:15px 25px;
-}
-
-.nav-right{
-gap:10px;
 }
 
 .movie-grid{
