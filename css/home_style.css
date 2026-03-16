@@ -6,6 +6,9 @@ padding:0;
 box-sizing:border-box;
 font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+html {
+  scroll-behavior: smooth;
+}
 
 body{
 padding-top:90px;
@@ -23,22 +26,65 @@ color:inherit;
 /* NAVBAR */
 
 .navbar{
-position:fixed;
-top:0;
-left:0;
-width:100%;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
 
-display:flex;
-justify-content:space-between;
-align-items:center;
+display: flex;
+justify-content: space-between;
+align-items: center;
 
-padding:15px 60px;
+padding: 15px 60px;
 
-background:#9584b3;
+background: #9584b3;
 
-box-shadow:0 6px 25px rgba(0,0,0,0.15);
+box-shadow: 0 6px 25px rgba(0,0,0,0.15);
 
-z-index:1000;
+overflow: hidden;
+z-index: 1000;
+}
+
+/* Moving light effect */
+.navbar::before{
+content: "";
+position: absolute;
+top: 0;
+left: -50%;
+width: 50%;
+height: 100%;
+
+background: linear-gradient(
+120deg,
+transparent,
+rgba(204, 171, 250, 0.6),
+transparent
+);
+
+animation: lightMove 5s infinite;
+}
+
+/* Animation */
+@keyframes lightMove{
+0%{
+left:-50%;
+}
+100%{
+left:120%;
+}
+}
+
+/* Gradient animation */
+@keyframes gradientMove{
+0%{
+background-position:0% 50%;
+}
+50%{
+background-position:100% 50%;
+}
+100%{
+background-position:0% 50%;
+}
 }
 
 
