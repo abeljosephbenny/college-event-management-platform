@@ -1,1 +1,53 @@
-/* Minimalist UI styles */
+
+:root {
+    --bg-color: #f9f9f9;
+    --text-main: #111111;
+    --text-muted: #666666;
+    --border-color: #eaeaea;
+    --accent: #000000;
+    --surface: #ffffff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+
+body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.5; }
+a { text-decoration: none; color: inherit; }
+
+/* Navbar */
+.navbar { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 5%; background: var(--surface); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100; }
+.logo strong { font-weight: 700; }
+.nav-actions { display: flex; gap: 1rem; align-items: center; }
+
+/* Buttons */
+.btn { padding: 0.6rem 1.25rem; border-radius: 6px; font-weight: 500; font-size: 0.9rem; cursor: pointer; transition: all 0.2s ease; border: none; display: inline-block; text-align: center; }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: #333; }
+.btn-outline { background: transparent; border: 1px solid var(--border-color); color: var(--text-main); }
+.btn-outline:hover { background: var(--bg-color); }
+.btn-text { background: transparent; color: var(--text-main); }
+
+/* Avatar */
+.avatar { width: 36px; height: 36px; background: var(--accent); color: #fff; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: 600; }
+
+/* Forms & Auth */
+.auth-container { display: flex; justify-content: center; align-items: center; min-height: 80vh; padding: 2rem; }
+.auth-card { background: var(--surface); padding: 2.5rem; border-radius: 12px; border: 1px solid var(--border-color); width: 100%; max-width: 400px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+.auth-card h2 { margin-bottom: 0.5rem; font-size: 1.5rem; }
+.auth-card p { color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem; }
+.form-group { margin-bottom: 1.2rem; }
+.form-group label { display: block; margin-bottom: 0.4rem; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); }
+.form-control { width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.95rem; background: var(--bg-color); transition: border-color 0.2s; }
+.form-control:focus { outline: none; border-color: var(--accent); background: var(--surface); }
+
+/* Profile Grid */
+.container { padding: 2rem 5%; max-width: 1200px; margin: 0 auto; }
+.profile-header { display: flex; align-items: center; gap: 2rem; margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border-color); }
+.profile-avatar-large { width: 80px; height: 80px; background: var(--accent); color: #fff; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 2rem; font-weight: 600; }
+.profile-info h1 { font-size: 1.8rem; margin-bottom: 0.25rem; }
+.profile-info p { color: var(--text-muted); font-size: 0.95rem; }
+
+/* Event Cards (Reused from previous step) */
+.event-row { display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 1rem; }
+.event-card { min-width: 280px; background: var(--surface); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem; transition: transform 0.2s; display: flex; flex-direction: column; gap: 0.5rem; }
+.event-card:hover { transform: translateY(-3px); }
+.badge { display: inline-block; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; background: var(--bg-color); border: 1px solid var(--border-color); width: fit-content; }
