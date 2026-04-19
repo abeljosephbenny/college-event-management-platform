@@ -1,3 +1,9 @@
+DROP TABLE IF EXISTS registrations;
+DROP TABLE IF EXISTS events;
+DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS users;
+
+
 -- USERS Table [cite: 2]
 CREATE TABLE users (
     user_id INT AUTO_INCREMENT PRIMARY KEY, -- [cite: 3]
@@ -12,12 +18,17 @@ CREATE TABLE users (
     admission_number VARCHAR(50) -- [cite: 3]
 );
 
+-- CATEGORIES Table 
+CREATE TABLE categories (
+    category_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
 -- EVENTS Table [cite: 5]
 CREATE TABLE events (
     event_id INT AUTO_INCREMENT PRIMARY KEY, -- [cite: 6]
-    organizer_id INT, -- [cite: 6]
     title VARCHAR(200) NOT NULL, -- [cite: 6]
-    category VARCHAR(50) NOT NULL, -- Added for homepage sorting (e.g., Cultural, Sports)
+    category_id INT(50) NOT NULL,
     approval_doc_path VARCHAR(255), -- [cite: 6]
     is_published BOOLEAN DEFAULT FALSE, -- [cite: 6]
     event_date DATE, -- [cite: 6]
@@ -31,12 +42,14 @@ CREATE TABLE events (
     description TEXT, -- [cite: 6]
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- [cite: 6]
     created_by INT, -- [cite: 6]
-    club_or_committee VARCHAR(100), -- [cite: 6]
-    poc INT, -- [cite: 6]
+    organizer VARCHAR(100), -- [cite: 6]
+    poc_id INT, -- [cite: 6]
     is_volunteer_required BOOLEAN DEFAULT FALSE, -- [cite: 6]
     participant_whatsapp_link VARCHAR(255), -- [cite: 6]
     volunteer_whatsapp_link VARCHAR(255), -- [cite: 6]
-    FOREIGN KEY (organizer_id) REFERENCES users(user_id)
+    FOREIGN KEY (created_by) REFERENCES users(user_id),
+    FOREIGN KEY (category_id) REFERENCES categories(category_id)
+
 );
 
 -- REGISTRATIONS Table [cite: 7]

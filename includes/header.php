@@ -20,6 +20,7 @@
                 </div>
             </a>
         <?php else: ?>
+            <a href="create-event.php" class="btn btn-primary"> Create Event</a>
             <a href="auth/login.php" class="btn btn-text">Log In</a>
             <a href="auth/signup.php" class="btn btn-primary">Sign Up</a>
         <?php endif; ?>

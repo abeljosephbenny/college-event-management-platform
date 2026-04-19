@@ -34,7 +34,11 @@ a { text-decoration: none; color: inherit; }
 .auth-card { background: var(--surface); padding: 2.5rem; border-radius: 12px; border: 1px solid var(--border-color); width: 100%; max-width: 400px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
 .auth-card h2 { margin-bottom: 0.5rem; font-size: 1.5rem; }
 .auth-card p { color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem; }
-.form-group { margin-bottom: 1.2rem; }
+.form-group { margin-bottom: 1.2rem; display: flex; flex-wrap: wrap;}
+.oneline { display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem; }
 .form-group label { display: block; margin-bottom: 0.4rem; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); }
 .form-control { width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.95rem; background: var(--bg-color); transition: border-color 0.2s; }
 .form-control:focus { outline: none; border-color: var(--accent); background: var(--surface); }

@@ -2,14 +2,22 @@
 require 'includes/db.php';
 require 'includes/header.php';
 
+// Fetch categories
+$stmt = $pdo->query("SELECT * FROM categories");
+$categories = [];
+while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $categories[$row['category_id']] = $row['name'];
+}
+
 // Fetch published events [cite: 6] grouped by category
-$stmt = $pdo->query("SELECT * FROM events WHERE is_published = 1 ORDER BY category, event_date ASC");
-$events = $stmt->fetchAll();
+$stmt = $pdo->query("SELECT * FROM events WHERE is_published = 0 ORDER BY category_id, event_date ASC");
+$events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Organize into an associative array: ['Cultural' => [...events], 'Sports' => [...events]]
 $categorized_events = [];
 foreach ($events as $event) {
-    $categorized_events[$event['category']][] = $event;
+    $categoryName = $categories[$event['category_id']] ?? "UNCATEGORIZED";
+    $categorized_events[$categoryName][] = $event;
 }
 ?>
 
