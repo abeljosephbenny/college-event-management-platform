@@ -30,7 +30,7 @@ foreach ($events as $event) {
                 <h2 class="category-title"><?= htmlspecialchars($category) ?></h2>
                 <div class="event-row">
                     <?php foreach ($categoryEvents as $e): ?>
-                        <a href="event.php?id=<?= $e['event_id'] ?>" class="event-card">
+                        <a href="/event.php?id=<?= $e['event_id'] ?>" class="event-card">
                             <span class="event-date">
                                 <?= date('M d, Y', strtotime($e['event_date'])) ?> &bull; <?= date('H:i', strtotime($e['start_time'])) ?>
                             </span>

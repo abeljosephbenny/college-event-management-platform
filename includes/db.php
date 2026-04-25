@@ -4,7 +4,7 @@ date_default_timezone_set('Asia/Kolkata');
 
 $host = '127.0.0.1';
 $db = 'college_event_management';
-$user = 'event_admin';
+$user = 'abhajkhan';
 $pass = 'abhajkhan';
 $charset = 'utf8mb4';
 
@@ -18,7 +18,7 @@ $options = [
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (\PDOException $e) {
-    error_log("EXCEPTION---> ".$e->getMessage().$e->getCode());
+    error_log("EXCEPTION---> " . $e->getMessage() . $e->getCode());
     // throw new \PDOException($e->getMessage(), (int) $e->getCode());
 }
 ?>
