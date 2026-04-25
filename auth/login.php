@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     if ($user and password_verify($password, $user['password'])) {
         $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['usrename'] = $user['email'];
+        $_SESSION['role'] = $user['role'];
 
         echo "Login Successful!!";
 
