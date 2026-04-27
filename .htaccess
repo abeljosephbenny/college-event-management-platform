@@ -1,0 +1,20 @@
+# ── Campus Events .htaccess ────────────────────────────────
+
+# Deny access to sensitive directories
+<FilesMatch "\.(sql|md|log)$">
+    Require all denied
+</FilesMatch>
+
+# Deny access to config and includes
+RedirectMatch 403 ^/config/.*$
+RedirectMatch 403 ^/includes/.*$
+
+# Prevent directory listing
+Options -Indexes
+
+# Set default charset
+AddDefaultCharset UTF-8
+
+# Custom error pages (optional)
+ErrorDocument 404 /index.php
+ErrorDocument 403 /index.php
