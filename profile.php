@@ -1,1 +1,0 @@
-<?php // Student profile page ?>
