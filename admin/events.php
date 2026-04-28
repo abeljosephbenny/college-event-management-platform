@@ -7,15 +7,18 @@ requireRole('Administrator');
 
 $pdo = getDBConnection();
 
-// Handle approve/reject
+// Handle approve/reject/unpublish
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $evtId  = intval($_POST['event_id'] ?? 0);
     $action = $_POST['evt_action'] ?? '';
 
-    if ($evtId && in_array($action, ['approve', 'reject'])) {
+    if ($evtId && in_array($action, ['approve', 'reject', 'unpublish'])) {
         if ($action === 'approve') {
             $pdo->prepare("UPDATE events SET is_published = TRUE WHERE event_id = ?")->execute([$evtId]);
             setFlash('success', 'Event approved and published.');
+        } elseif ($action === 'unpublish') {
+            $pdo->prepare("UPDATE events SET is_published = FALSE WHERE event_id = ?")->execute([$evtId]);
+            setFlash('success', 'Event has been unpublished.');
         } else {
             $pdo->prepare("DELETE FROM events WHERE event_id = ? AND is_published = FALSE")->execute([$evtId]);
             setFlash('success', 'Event rejected and removed.');
@@ -55,14 +58,20 @@ require_once __DIR__ . '/../includes/header.php';
                     <thead><tr><th>Event</th><th>Organizer</th><th>Category</th><th>Date</th><th>Doc</th><th>Status</th><th>Actions</th></tr></thead>
                     <tbody>
                         <?php foreach ($events as $e): ?>
-                        <tr>
+                        <tr class="clickable-row" onclick="window.location='/admin/event_detail.php?id=<?= $e['event_id'] ?>'">
                             <td><strong><?= sanitize($e['title']) ?></strong></td>
-                            <td><?= sanitize($e['creator_name'] ?? $e['organizer'] ?? 'Unknown') ?></td>
+                            <td onclick="event.stopPropagation()">
+                                <?php if ($e['created_by']): ?>
+                                    <a href="/admin/user_profile.php?id=<?= $e['created_by'] ?>" class="organizer-link"><?= sanitize($e['creator_name'] ?? $e['organizer'] ?? 'Unknown') ?></a>
+                                <?php else: ?>
+                                    <?= sanitize($e['creator_name'] ?? $e['organizer'] ?? 'Unknown') ?>
+                                <?php endif; ?>
+                            </td>
                             <td><span class="badge badge-accent"><?= sanitize($e['category_name']) ?></span></td>
                             <td><?= $e['event_date'] ? formatDate($e['event_date']) : 'TBA' ?></td>
                             <td>
                                 <?php if ($e['approval_doc_path']): ?>
-                                    <a href="/<?= sanitize($e['approval_doc_path']) ?>" target="_blank" class="btn btn-secondary btn-sm">View Doc</a>
+                                    <a href="/<?= sanitize($e['approval_doc_path']) ?>" target="_blank" class="btn btn-secondary btn-sm" onclick="event.stopPropagation()">View Doc</a>
                                 <?php else: ?>
                                     <span class="text-muted text-sm">None</span>
                                 <?php endif; ?>
@@ -72,15 +81,18 @@ require_once __DIR__ . '/../includes/header.php';
                                     <?= $e['is_published'] ? 'Published' : 'Pending' ?>
                                 </span>
                             </td>
-                            <td>
+                            <td onclick="event.stopPropagation()">
                                 <?php if (!$e['is_published']): ?>
                                     <form method="POST" style="display:inline-flex;gap:.35rem">
                                         <input type="hidden" name="event_id" value="<?= $e['event_id'] ?>">
-                                        <button name="evt_action" value="approve" class="btn btn-success btn-sm">Approve</button>
-                                        <button name="evt_action" value="reject" class="btn btn-danger btn-sm" data-confirm="Reject and remove this event?">Reject</button>
+                                        <button name="evt_action" value="approve" class="btn btn-success btn-sm" data-confirm="Approve and publish this event?">Approve</button>
+                                        <button name="evt_action" value="reject" class="btn btn-danger btn-sm" data-confirm="Reject and permanently remove this event? This cannot be undone.">Reject</button>
                                     </form>
                                 <?php else: ?>
-                                    <span class="text-muted text-sm">Live</span>
+                                    <form method="POST" style="display:inline">
+                                        <input type="hidden" name="event_id" value="<?= $e['event_id'] ?>">
+                                        <button name="evt_action" value="unpublish" class="btn btn-warning btn-sm" data-confirm="Unpublish this event? It will no longer be visible to students.">Unpublish</button>
+                                    </form>
                                 <?php endif; ?>
                             </td>
                         </tr>

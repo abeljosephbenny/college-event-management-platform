@@ -86,9 +86,15 @@ require_once __DIR__ . '/../includes/header.php';
                     <thead><tr><th>Event</th><th>Created By</th><th>Category</th><th>Date</th><th>Status</th></tr></thead>
                     <tbody>
                         <?php foreach ($recentEvents as $e): ?>
-                        <tr>
+                        <tr class="clickable-row" onclick="window.location='/admin/event_detail.php?id=<?= $e['event_id'] ?>'">
                             <td><strong><?= sanitize($e['title']) ?></strong></td>
-                            <td><?= sanitize($e['creator_name'] ?? 'Unknown') ?></td>
+                            <td onclick="event.stopPropagation()">
+                                <?php if ($e['created_by']): ?>
+                                    <a href="/admin/user_profile.php?id=<?= $e['created_by'] ?>" class="organizer-link"><?= sanitize($e['creator_name'] ?? 'Unknown') ?></a>
+                                <?php else: ?>
+                                    <?= sanitize($e['creator_name'] ?? 'Unknown') ?>
+                                <?php endif; ?>
+                            </td>
                             <td><span class="badge badge-accent"><?= sanitize($e['category_name']) ?></span></td>
                             <td><?= $e['event_date'] ? formatDate($e['event_date']) : 'TBA' ?></td>
                             <td><span class="badge badge-<?= $e['is_published'] ? 'success' : 'warning' ?>"><?= $e['is_published'] ? 'Published' : 'Pending' ?></span></td>

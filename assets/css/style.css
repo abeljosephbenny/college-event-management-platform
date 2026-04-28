@@ -685,6 +685,21 @@ textarea.form-control {
   background: rgba(79, 70, 229, .08)
 }
 
+/* ── Organizer Links in Tables ─────────────────────────────── */
+.organizer-link {
+  color: var(--clr-primary);
+  font-weight: 600;
+  text-decoration: none;
+  padding: .15rem .4rem;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition)
+}
+
+.organizer-link:hover {
+  background: rgba(79, 70, 229, .08);
+  color: var(--clr-primary-dark)
+}
+
 /* ── Alerts / Toasts ───────────────────────────────────────── */
 .alert {
   padding: 1rem 1.25rem;
