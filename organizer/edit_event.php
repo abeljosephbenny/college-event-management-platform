@@ -43,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $totalSlots  = intval($_POST['total_slots'] ?? 0);
     $organizer   = sanitize($_POST['organizer_name'] ?? $_SESSION['user_name']);
     $volRequired = isset($_POST['is_volunteer_required']) ? 1 : 0;
+    $regFee      = floatval($_POST['registration_fee'] ?? 0);
     $pWhatsapp   = sanitize($_POST['participant_whatsapp_link'] ?? '');
     $vWhatsapp   = sanitize($_POST['volunteer_whatsapp_link'] ?? '');
 
@@ -72,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             title = ?, category_id = ?, description = ?, event_date = ?,
             start_time = ?, end_time = ?, application_deadline = ?,
             venue = ?, place = ?, total_slots = ?, slots_left = ?,
-            organizer = ?, is_volunteer_required = ?, approval_doc_path = ?,
+            organizer = ?, is_volunteer_required = ?, registration_fee = ?, approval_doc_path = ?,
             participant_whatsapp_link = ?, volunteer_whatsapp_link = ?
         WHERE event_id = ? AND created_by = ?
     ");
@@ -80,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $title, $categoryId, $description,
         $eventDate ?: null, $startTime ?: null, $endTime ?: null,
         $deadline ?: null, $venue, $place,
-        $totalSlots, $newSlotsLeft, $organizer, $volRequired, $docPath,
+        $totalSlots, $newSlotsLeft, $organizer, $volRequired, $regFee, $docPath,
         $pWhatsapp, $vWhatsapp,
         $eventId, $userId
     ]);
@@ -165,10 +166,16 @@ require_once __DIR__ . '/../includes/header.php';
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="total_slots">Total Slots</label>
-                    <input type="number" id="total_slots" name="total_slots" class="form-control" min="0" value="<?= $event['total_slots'] ?? 0 ?>">
-                    <div class="form-hint">Currently <?= $event['slots_left'] ?? 0 ?> slots remaining. Changing total slots will adjust remaining accordingly.</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="total_slots">Total Slots</label>
+                        <input type="number" id="total_slots" name="total_slots" class="form-control" min="0" value="<?= $event['total_slots'] ?? 0 ?>">
+                        <div class="form-hint">Currently <?= $event['slots_left'] ?? 0 ?> slots remaining. Changing total slots will adjust remaining accordingly.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="registration_fee">Registration Fee (₹)</label>
+                        <input type="number" id="registration_fee" name="registration_fee" class="form-control" min="0" step="0.01" value="<?= $event['registration_fee'] ?? 0 ?>">
+                    </div>
                 </div>
 
                 <div class="form-group">

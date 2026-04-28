@@ -60,6 +60,7 @@ CREATE TABLE events (
     organizer               VARCHAR(100),
     poc_id                  INT,
     is_volunteer_required   BOOLEAN       DEFAULT FALSE,
+    registration_fee        DECIMAL(10,2) DEFAULT 0.00,
     participant_whatsapp_link VARCHAR(255),
     volunteer_whatsapp_link   VARCHAR(255),
 

@@ -112,6 +112,13 @@ require_once __DIR__ . '/../includes/header.php';
                     </div>
                 </div>
                 <?php endif; ?>
+                <div class="stat-card">
+                    <div class="stat-icon primary">💰</div>
+                    <div>
+                        <div class="stat-label">Registration Fee</div>
+                        <div style="font-weight:600"><?= ($event['registration_fee'] > 0) ? '₹' . number_format($event['registration_fee'], 2) : 'Free' ?></div>
+                    </div>
+                </div>
             </div>
 
             <!-- Registration Stats -->

@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $totalSlots  = intval($_POST['total_slots'] ?? 0);
     $organizer   = sanitize($_POST['organizer_name'] ?? $_SESSION['user_name']);
     $volRequired = isset($_POST['is_volunteer_required']) ? 1 : 0;
+    $regFee      = floatval($_POST['registration_fee'] ?? 0);
     $pWhatsapp   = sanitize($_POST['participant_whatsapp_link'] ?? '');
     $vWhatsapp   = sanitize($_POST['volunteer_whatsapp_link'] ?? '');
 
@@ -51,15 +52,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $pdo->prepare("
         INSERT INTO events (title, category_id, description, event_date, start_time, end_time,
             application_deadline, venue, place, total_slots, slots_left, organizer, created_by,
-            is_volunteer_required, approval_doc_path, participant_whatsapp_link, volunteer_whatsapp_link)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            is_volunteer_required, registration_fee, approval_doc_path, participant_whatsapp_link, volunteer_whatsapp_link)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ");
     $stmt->execute([
         $title, $categoryId, $description,
         $eventDate ?: null, $startTime ?: null, $endTime ?: null,
         $deadline ?: null, $venue, $place,
         $totalSlots, $totalSlots, $organizer, $_SESSION['user_id'],
-        $volRequired, $docPath, $pWhatsapp, $vWhatsapp
+        $volRequired, $regFee, $docPath, $pWhatsapp, $vWhatsapp
     ]);
 
     setFlash('success', 'Event created! It will be published once approved by an admin.');
@@ -140,9 +141,15 @@ require_once __DIR__ . '/../includes/header.php';
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="total_slots">Total Slots</label>
-                    <input type="number" id="total_slots" name="total_slots" class="form-control" min="0" placeholder="Leave 0 for unlimited">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="total_slots">Total Slots</label>
+                        <input type="number" id="total_slots" name="total_slots" class="form-control" min="0" placeholder="Leave 0 for unlimited">
+                    </div>
+                    <div class="form-group">
+                        <label for="registration_fee">Registration Fee (₹)</label>
+                        <input type="number" id="registration_fee" name="registration_fee" class="form-control" min="0" step="0.01" value="0" placeholder="0 for free">
+                    </div>
                 </div>
 
                 <div class="form-group">

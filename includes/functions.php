@@ -10,7 +10,7 @@ require_once __DIR__ . '/../config/database.php';
  * Sanitize user input
  */
 function sanitize(string $input): string {
-    return htmlspecialchars(trim($input), ENT_QUOTES, 'UTF-8');
+    return htmlspecialchars(trim($input), ENT_COMPAT, 'UTF-8');
 }
 
 /**
