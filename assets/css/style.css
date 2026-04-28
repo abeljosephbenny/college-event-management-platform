@@ -378,6 +378,7 @@ h4 {
 
 .btn-primary:hover {
   background: var(--clr-primary-dark);
+  color: #fff;
   transform: translateY(-1px);
   box-shadow: 0 6px 20px rgba(79, 70, 229, .35)
 }
@@ -646,6 +647,18 @@ textarea.form-control {
 
 .data-table tr:hover td {
   background: rgba(79, 70, 229, .02)
+}
+
+.data-table tr.clickable-row {
+  cursor: pointer
+}
+
+.data-table tr.clickable-row:hover td {
+  background: rgba(79, 70, 229, .05)
+}
+
+.data-table tr.clickable-row:active td {
+  background: rgba(79, 70, 229, .08)
 }
 
 /* ── Alerts / Toasts ───────────────────────────────────────── */
