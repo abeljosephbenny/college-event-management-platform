@@ -19,7 +19,7 @@ require_once __DIR__ . '/../includes/header.php';
 
         <?= renderFlash() ?>
 
-        <form method="POST" action="/auth/process_auth.php" id="signup-form">
+        <form method="POST" action="/auth/process_auth.php" id="signup-form" enctype="multipart/form-data">
             <input type="hidden" name="action" value="signup">
 
             <div class="form-group">
@@ -82,6 +82,11 @@ require_once __DIR__ . '/../includes/header.php';
                     <label for="department">Department</label>
                     <input type="text" id="department" name="department" class="form-control" placeholder="e.g. Computer Science">
                 </div>
+            </div>
+
+            <div class="form-group">
+                <label for="profile_pic">Profile Picture <span class="text-muted text-sm">(JPG, PNG, GIF, WebP — max 5MB)</span></label>
+                <input type="file" id="profile_pic" name="profile_pic" class="form-control" accept="image/jpeg,image/png,image/gif,image/webp">
             </div>
 
             <button type="submit" class="btn btn-primary btn-block btn-lg mt-2">Create Account</button>

@@ -58,9 +58,13 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
                 <div class="nav-user">
                     <?php if ($currentUser): ?>
-                        <div class="user-avatar" title="<?= sanitize($currentUser['name']) ?>">
-                            <?= getInitials($currentUser['name']) ?>
-                        </div>
+                        <a href="/profile.php" class="user-avatar-link" title="<?= sanitize($currentUser['name']) ?>">
+                            <?php if (!empty($currentUser['profile_pic'])): ?>
+                                <img src="/<?= sanitize($currentUser['profile_pic']) ?>" alt="<?= sanitize($currentUser['name']) ?>" class="user-avatar-img">
+                            <?php else: ?>
+                                <div class="user-avatar"><?= getInitials($currentUser['name']) ?></div>
+                            <?php endif; ?>
+                        </a>
                         <a href="/auth/logout.php" class="btn btn-secondary btn-sm">Logout</a>
                     <?php else: ?>
                         <a href="/auth/login.php" class="btn btn-outline btn-sm">Log In</a>

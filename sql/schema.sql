@@ -22,6 +22,7 @@ CREATE TABLE users (
     year          INT,
     department    VARCHAR(100),
     admission_number VARCHAR(50),
+    profile_pic   VARCHAR(255)  DEFAULT NULL,
     created_at    TIMESTAMP     DEFAULT CURRENT_TIMESTAMP,
 
     INDEX idx_users_email (email),

@@ -40,6 +40,7 @@ if ($action === 'login') {
     $_SESSION['user_name']  = $user['name'];
     $_SESSION['user_email'] = $user['email'];
     $_SESSION['user_role']  = $user['role'];
+    $_SESSION['profile_pic'] = $user['profile_pic'] ?? null;
 
     setFlash('success', 'Welcome back, ' . $user['name'] . '!');
 
@@ -109,11 +110,21 @@ if ($action === 'signup') {
     // Students are verified immediately
     $isVerified = ($role === 'Student') ? 1 : 0;
 
+    // Handle profile picture upload
+    $profilePicPath = null;
+    if (isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error'] !== UPLOAD_ERR_NO_FILE) {
+        $profilePicPath = uploadProfilePic($_FILES['profile_pic']);
+        if ($profilePicPath === false) {
+            setFlash('danger', 'Invalid profile picture. Please upload a JPG, PNG, GIF or WebP image (max 5MB).');
+            redirect('/auth/signup.php');
+        }
+    }
+
     $stmt = $pdo->prepare("
-        INSERT INTO users (name, email, password, role, is_verified, phone, year, department, admission_number)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO users (name, email, password, role, is_verified, phone, year, department, admission_number, profile_pic)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ");
-    $stmt->execute([$name, $email, $hashedPassword, $role, $isVerified, $phone, $year, $department, $admissionNumber]);
+    $stmt->execute([$name, $email, $hashedPassword, $role, $isVerified, $phone, $year, $department, $admissionNumber, $profilePicPath]);
 
     if ($role === 'Organizer') {
         setFlash('success', 'Account created! Your organizer account is pending admin approval.');

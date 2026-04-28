@@ -79,10 +79,11 @@ function isLoggedIn(): bool {
 function getCurrentUser(): ?array {
     if (!isLoggedIn()) return null;
     return [
-        'user_id'    => $_SESSION['user_id'],
-        'name'       => $_SESSION['user_name'],
-        'email'      => $_SESSION['user_email'],
-        'role'       => $_SESSION['user_role'],
+        'user_id'     => $_SESSION['user_id'],
+        'name'        => $_SESSION['user_name'],
+        'email'       => $_SESSION['user_email'],
+        'role'        => $_SESSION['user_role'],
+        'profile_pic' => $_SESSION['profile_pic'] ?? null,
     ];
 }
 
@@ -134,6 +135,39 @@ function uploadApprovalDoc(array $file): string|false {
 
     if (move_uploaded_file($file['tmp_name'], $path)) {
         return 'uploads/approval_docs/' . $filename;
+    }
+    return false;
+}
+
+/**
+ * Handle profile picture upload
+ * Returns the relative path on success, or false on failure
+ */
+function uploadProfilePic(array $file): string|false {
+    if ($file['error'] !== UPLOAD_ERR_OK) return false;
+    if ($file['size'] > MAX_UPLOAD_SIZE) return false;
+
+    $finfo = new finfo(FILEINFO_MIME_TYPE);
+    $mime = $finfo->file($file['tmp_name']);
+    $allowed = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    if (!in_array($mime, $allowed)) return false;
+
+    $ext = match($mime) {
+        'image/jpeg' => 'jpg',
+        'image/png'  => 'png',
+        'image/gif'  => 'gif',
+        'image/webp' => 'webp',
+        default      => 'bin',
+    };
+
+    $dir = UPLOAD_DIR . 'profile_pics/';
+    if (!is_dir($dir)) mkdir($dir, 0755, true);
+
+    $filename = uniqid('pfp_') . '.' . $ext;
+    $path = $dir . $filename;
+
+    if (move_uploaded_file($file['tmp_name'], $path)) {
+        return 'uploads/profile_pics/' . $filename;
     }
     return false;
 }
