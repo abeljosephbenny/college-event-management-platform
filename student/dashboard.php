@@ -46,21 +46,27 @@ require_once __DIR__ . '/../includes/header.php';
             <div class="stat-card">
                 <div class="stat-icon success">✅</div>
                 <div>
-                    <div class="stat-value"><?= count(array_filter($registrations, fn($r) => $r['type'] === 'Participant')) ?></div>
+                    <div class="stat-value">
+                        <?= count(array_filter($registrations, fn($r) => $r['type'] === 'Participant')) ?>
+                    </div>
                     <div class="stat-label">As Participant</div>
                 </div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon warning">🤝</div>
                 <div>
-                    <div class="stat-value"><?= count(array_filter($registrations, fn($r) => $r['type'] === 'Volunteer')) ?></div>
+                    <div class="stat-value">
+                        <?= count(array_filter($registrations, fn($r) => $r['type'] === 'Volunteer')) ?>
+                    </div>
                     <div class="stat-label">As Volunteer</div>
                 </div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon accent">📋</div>
                 <div>
-                    <div class="stat-value"><?= count(array_filter($registrations, fn($r) => $r['attendance_marked'])) ?></div>
+                    <div class="stat-value">
+                        <?= count(array_filter($registrations, fn($r) => $r['attendance_marked'])) ?>
+                    </div>
                     <div class="stat-label">Attended</div>
                 </div>
             </div>
@@ -100,7 +106,7 @@ require_once __DIR__ . '/../includes/header.php';
                             <?php if ($reg['type'] === 'Volunteer'): ?>
                                 <div class="mt-1">
                                     Volunteer Status:
-                                    <span class="badge badge-<?= match($reg['vol_approval_status']) {
+                                    <span class="badge badge-<?= match ($reg['vol_approval_status']) {
                                         'Approved' => 'success', 'Rejected' => 'danger', default => 'warning'
                                     } ?>">
                                         <?= $reg['vol_approval_status'] ?>
@@ -112,8 +118,10 @@ require_once __DIR__ . '/../includes/header.php';
                             <?php endif; ?>
                         </div>
                         <div class="card-footer">
-                            <a href="/event_detail.php?id=<?= $reg['event_id'] ?>" class="btn btn-secondary btn-sm">View Event</a>
-                            <a href="/student/ticket.php?reg_id=<?= $reg['reg_id'] ?>" class="btn btn-primary btn-sm">View Ticket</a>
+                            <a href="/event_detail.php?id=<?= $reg['event_id'] ?>" class="btn btn-secondary btn-sm">View
+                                Event</a>
+                            <a href="/student/ticket.php?reg_id=<?= $reg['reg_id'] ?>" class="btn btn-primary btn-sm">View
+                                Ticket</a>
                         </div>
                     </div>
                 <?php endforeach; ?>
