@@ -12,6 +12,19 @@ $userId = intval($_GET['id'] ?? 0);
 
 if (!$userId) { setFlash('danger', 'User not found.'); redirect('/admin/dashboard.php'); }
 
+// Handle POST actions
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $action = $_POST['admin_action'] ?? '';
+    if ($action === 'activate') {
+        $pdo->prepare("UPDATE users SET is_verified = TRUE WHERE user_id = ?")->execute([$userId]);
+        setFlash('success', 'User has been activated.');
+    } elseif ($action === 'deactivate') {
+        $pdo->prepare("UPDATE users SET is_verified = FALSE WHERE user_id = ?")->execute([$userId]);
+        setFlash('success', 'User has been deactivated.');
+    }
+    redirect('/admin/user_profile.php?id=' . $userId);
+}
+
 $stmt = $pdo->prepare("SELECT * FROM users WHERE user_id = ?");
 $stmt->execute([$userId]);
 $user = $stmt->fetch();
@@ -149,6 +162,23 @@ require_once __DIR__ . '/../includes/header.php';
                     <div class="auc-detail-value">#<?= $user['user_id'] ?></div>
                 </div>
             </div>
+
+            <!-- Admin Actions -->
+            <?php if ($user['role'] !== 'Administrator'): ?>
+            <div class="auc-actions">
+                <?php if ($user['is_verified']): ?>
+                    <form method="POST" style="display:inline">
+                        <input type="hidden" name="admin_action" value="deactivate">
+                        <button type="submit" class="btn btn-warning" data-confirm="Deactivate <?= sanitize($user['name']) ?>? They will no longer be able to log in.">⏸️ Deactivate User</button>
+                    </form>
+                <?php else: ?>
+                    <form method="POST" style="display:inline">
+                        <input type="hidden" name="admin_action" value="activate">
+                        <button type="submit" class="btn btn-success" data-confirm="Activate <?= sanitize($user['name']) ?>? They will be able to log in.">✅ Activate User</button>
+                    </form>
+                <?php endif; ?>
+            </div>
+            <?php endif; ?>
         </div>
 
         <!-- Organizer's Events -->
@@ -291,6 +321,14 @@ a.auc-contact-value:hover {
     font-weight: 700;
     font-size: 1.1rem;
     color: var(--clr-text);
+}
+
+.auc-actions {
+    padding: 1.5rem 2rem;
+    border-top: 2px solid var(--clr-border);
+    display: flex;
+    gap: .75rem;
+    flex-wrap: wrap;
 }
 
 @media(max-width:600px) {
