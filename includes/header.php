@@ -36,7 +36,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <nav class="navbar">
             <div class="container">
                 <a href="/" class="navbar-brand">
-                    <span>⌗ <?= SITE_NAME ?></span>
+                    <span>⚡ <?= SITE_NAME ?></span>
                 </a>
 
                 <div class="nav-links" id="nav-links">
@@ -60,7 +60,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                     <?php if ($currentUser): ?>
                         <a href="/profile.php" class="user-avatar-link" title="<?= sanitize($currentUser['name']) ?>">
                             <?php if (!empty($currentUser['profile_pic'])): ?>
-                                <img src="/<?= sanitize($currentUser['profile_pic']) ?>" alt="<?= sanitize($currentUser['name']) ?>" class="user-avatar-img">
+                                <img src="/<?= sanitize($currentUser['profile_pic']) ?>" alt="<?= sanitize($currentUser['name']) ?>"
+                                    class="user-avatar-img">
                             <?php else: ?>
                                 <div class="user-avatar"><?= getInitials($currentUser['name']) ?></div>
                             <?php endif; ?>

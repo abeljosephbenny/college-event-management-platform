@@ -5,30 +5,30 @@
 
 /* ── CSS Custom Properties ─────────────────────────────────── */
 :root {
-  --clr-bg: #f4f6fb;
+  --clr-bg: #f5f5f5;
   --clr-surface: #ffffff;
-  --clr-surface-alt: #f0f2f8;
-  --clr-primary: #4f46e5;
-  --clr-primary-light: #818cf8;
-  --clr-primary-dark: #3730a3;
+  --clr-surface-alt: #fafafa;
+  --clr-primary: #18181b;
+  --clr-primary-light: #3f3f46;
+  --clr-primary-dark: #09090b;
   --clr-accent: #06b6d4;
   --clr-success: #10b981;
   --clr-warning: #f59e0b;
   --clr-danger: #ef4444;
-  --clr-text: #1e293b;
-  --clr-text-secondary: #64748b;
-  --clr-text-muted: #94a3b8;
-  --clr-border: #e2e8f0;
-  --clr-border-light: #f1f5f9;
+  --clr-text: #09090b;
+  --clr-text-secondary: #52525b;
+  --clr-text-muted: #a1a1aa;
+  --clr-border: #e4e4e7;
+  --clr-border-light: #f4f4f5;
   --font: 'Inter', system-ui, sans-serif;
   --radius-sm: 6px;
   --radius: 10px;
   --radius-lg: 16px;
   --radius-xl: 24px;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, .06);
-  --shadow: 0 4px 12px rgba(0, 0, 0, .08);
-  --shadow-lg: 0 12px 32px rgba(0, 0, 0, .12);
-  --shadow-primary: 0 4px 14px rgba(79, 70, 229, .25);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, .04);
+  --shadow: 0 4px 12px rgba(0, 0, 0, .06);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, .1);
+  --shadow-primary: 0 4px 14px rgba(0, 0, 0, .18);
   --transition: .2s ease;
   --transition-slow: .35s ease;
   --nav-height: 64px;
@@ -205,10 +205,8 @@ h4 {
 }
 
 .navbar-brand span {
-  background: linear-gradient(135deg, var(--clr-primary), var(--clr-accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text
+  color: var(--clr-primary);
+  letter-spacing: -.02em
 }
 
 .nav-links {
@@ -229,7 +227,7 @@ h4 {
 .nav-links a:hover,
 .nav-links a.active {
   color: var(--clr-primary);
-  background: rgba(79, 70, 229, .06)
+  background: rgba(0, 0, 0, .04)
 }
 
 .nav-user {
@@ -242,7 +240,7 @@ h4 {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--clr-primary), var(--clr-accent));
+  background: var(--clr-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -407,7 +405,7 @@ h4 {
   background: var(--clr-primary-dark);
   color: #fff;
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(79, 70, 229, .35)
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .25)
 }
 
 .btn-secondary {
@@ -506,7 +504,7 @@ h4 {
 
 .form-control:focus {
   border-color: var(--clr-primary);
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, .12)
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, .08)
 }
 
 .form-control::placeholder {
@@ -551,7 +549,7 @@ textarea.form-control {
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  background: linear-gradient(135deg, #eef2ff 0%, #f0f9ff 50%, #faf5ff 100%)
+  background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 50%, #fafafa 100%)
 }
 
 .auth-card {
@@ -590,10 +588,8 @@ textarea.form-control {
 }
 
 .auth-brand span {
-  background: linear-gradient(135deg, var(--clr-primary), var(--clr-accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text
+  color: var(--clr-primary);
+  letter-spacing: -.02em
 }
 
 /* ── Badges ────────────────────────────────────────────────── */
@@ -608,7 +604,7 @@ textarea.form-control {
 }
 
 .badge-primary {
-  background: rgba(79, 70, 229, .1);
+  background: rgba(0, 0, 0, .06);
   color: var(--clr-primary)
 }
 
@@ -673,7 +669,7 @@ textarea.form-control {
 }
 
 .data-table tr:hover td {
-  background: rgba(79, 70, 229, .02)
+  background: rgba(0, 0, 0, .015)
 }
 
 .data-table tr.clickable-row {
@@ -681,11 +677,11 @@ textarea.form-control {
 }
 
 .data-table tr.clickable-row:hover td {
-  background: rgba(79, 70, 229, .05)
+  background: rgba(0, 0, 0, .03)
 }
 
 .data-table tr.clickable-row:active td {
-  background: rgba(79, 70, 229, .08)
+  background: rgba(0, 0, 0, .05)
 }
 
 /* ── Organizer Links in Tables ─────────────────────────────── */
@@ -699,7 +695,7 @@ textarea.form-control {
 }
 
 .organizer-link:hover {
-  background: rgba(79, 70, 229, .08);
+  background: rgba(0, 0, 0, .05);
   color: var(--clr-primary-dark)
 }
 
@@ -735,9 +731,9 @@ textarea.form-control {
 }
 
 .alert-info {
-  background: rgba(79, 70, 229, .06);
+  background: rgba(0, 0, 0, .03);
   color: var(--clr-primary-dark);
-  border: 1px solid rgba(79, 70, 229, .15)
+  border: 1px solid rgba(0, 0, 0, .1)
 }
 
 .toast-container {
@@ -770,10 +766,7 @@ textarea.form-control {
 .hero h1 {
   font-size: 2.5rem;
   margin-bottom: .75rem;
-  background: linear-gradient(135deg, var(--clr-text) 0%, var(--clr-primary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text
+  color: var(--clr-text)
 }
 
 .hero p {
@@ -801,7 +794,7 @@ textarea.form-control {
 
 .search-box input:focus {
   border-color: var(--clr-primary);
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, .1)
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, .06)
 }
 
 .search-box .search-icon {
@@ -841,7 +834,7 @@ textarea.form-control {
   border-color: var(--clr-primary)
 }
 
-/* ── Event Cards ───────────────────────────────────────────── */
+/* ── Event Cards (Browse Page) ────────────────────────────── */
 .event-card {
   position: relative;
   overflow: hidden;
@@ -923,11 +916,102 @@ textarea.form-control {
   transition: width var(--transition-slow)
 }
 
+/* ── Registration Cards (Dashboard) ───────────────────────── */
+.reg-list {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem
+}
+
+.reg-card {
+  display: flex;
+  background: var(--clr-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--clr-border-light);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: all var(--transition)
+}
+
+.reg-card:hover {
+  box-shadow: var(--shadow);
+  border-color: var(--clr-border)
+}
+
+.reg-card-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  flex-shrink: 0
+}
+
+.reg-card--part .reg-card-left {
+  background: var(--clr-primary);
+}
+
+.reg-card--vol .reg-card-left {
+  background: var(--clr-warning);
+}
+
+.reg-card-type {
+  font-size: 1.4rem;
+  filter: grayscale(0) brightness(2)
+}
+
+.reg-card-body {
+  flex: 1;
+  padding: 1rem 1.25rem;
+  min-width: 0
+}
+
+.reg-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: .5rem;
+  margin-bottom: .4rem
+}
+
+.reg-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
+
+.reg-card-badges {
+  display: flex;
+  gap: .35rem;
+  flex-shrink: 0;
+  flex-wrap: wrap
+}
+
+.reg-card-meta {
+  display: flex;
+  gap: .75rem;
+  font-size: .8rem;
+  color: var(--clr-text-muted);
+  margin-bottom: .5rem
+}
+
+.reg-card-meta span {
+  display: flex;
+  align-items: center;
+  gap: .2rem
+}
+
+.reg-card-actions {
+  display: flex;
+  gap: .5rem
+}
+
 /* ── Ticket / Passcard ─────────────────────────────────────── */
 .ticket {
   max-width: 420px;
   margin: 2rem auto;
-  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #06b6d4 100%);
+  background: linear-gradient(135deg, #18181b 0%, #3f3f46 50%, #52525b 100%);
   border-radius: var(--radius-xl);
   padding: 2px;
   box-shadow: var(--shadow-lg)
@@ -953,7 +1037,7 @@ textarea.form-control {
   font-size: 2rem;
   font-weight: 800;
   letter-spacing: .1em;
-  color: var(--clr-primary);
+  color: var(--clr-text);
   margin: 1.5rem 0;
   padding: 1rem;
   background: var(--clr-surface-alt);
@@ -1019,7 +1103,7 @@ textarea.form-control {
 }
 
 .sidebar-nav a.active {
-  background: rgba(79, 70, 229, .08);
+  background: rgba(0, 0, 0, .05);
   color: var(--clr-primary)
 }
 
@@ -1301,6 +1385,14 @@ textarea.form-control {
   .page-header {
     flex-direction: column;
     align-items: flex-start
+  }
+
+  .reg-card-top {
+    flex-direction: column
+  }
+
+  .reg-card-meta {
+    flex-wrap: wrap
   }
 }
 

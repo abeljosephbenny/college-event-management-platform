@@ -85,43 +85,43 @@ require_once __DIR__ . '/../includes/header.php';
                 <a href="/" class="btn btn-primary mt-2">Explore Events</a>
             </div>
         <?php else: ?>
-            <div class="grid grid-2">
+            <div class="reg-list">
                 <?php foreach ($registrations as $reg): ?>
-                    <div class="card">
-                        <div class="card-header">
-                            <div>
-                                <h3><?= sanitize($reg['title']) ?></h3>
-                                <span class="badge badge-accent"><?= sanitize($reg['category_name']) ?></span>
+                    <div class="reg-card <?= $reg['type'] === 'Volunteer' ? 'reg-card--vol' : 'reg-card--part' ?>">
+                        <div class="reg-card-left">
+                            <div class="reg-card-type">
+                                <?= $reg['type'] === 'Volunteer' ? '🤝' : '🎫' ?>
                             </div>
-                            <span class="badge badge-<?= $reg['type'] === 'Volunteer' ? 'warning' : 'primary' ?>">
-                                <?= $reg['type'] ?>
-                            </span>
                         </div>
-                        <div class="card-body">
-                            <div class="event-meta">
+                        <div class="reg-card-body">
+                            <div class="reg-card-top">
+                                <h3 class="reg-card-title"><?= sanitize($reg['title']) ?></h3>
+                                <div class="reg-card-badges">
+                                    <span class="badge badge-accent"><?= sanitize($reg['category_name']) ?></span>
+                                    <span class="badge badge-<?= $reg['type'] === 'Volunteer' ? 'warning' : 'primary' ?>">
+                                        <?= $reg['type'] ?>
+                                    </span>
+                                    <?php if ($reg['type'] === 'Volunteer'): ?>
+                                        <span class="badge badge-<?= match ($reg['vol_approval_status']) {
+                                            'Approved' => 'success', 'Rejected' => 'danger', default => 'warning'
+                                        } ?>">
+                                            <?= $reg['vol_approval_status'] ?>
+                                        </span>
+                                    <?php endif; ?>
+                                    <?php if ($reg['attendance_marked']): ?>
+                                        <span class="badge badge-success">✅ Attended</span>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                            <div class="reg-card-meta">
                                 <span>📅 <?= $reg['event_date'] ? formatDate($reg['event_date']) : 'TBA' ?></span>
                                 <span>🕐 <?= $reg['start_time'] ? formatTime($reg['start_time']) : '' ?></span>
                                 <span>📍 <?= sanitize($reg['venue'] ?? 'TBA') ?></span>
                             </div>
-                            <?php if ($reg['type'] === 'Volunteer'): ?>
-                                <div class="mt-1">
-                                    Volunteer Status:
-                                    <span class="badge badge-<?= match ($reg['vol_approval_status']) {
-                                        'Approved' => 'success', 'Rejected' => 'danger', default => 'warning'
-                                    } ?>">
-                                        <?= $reg['vol_approval_status'] ?>
-                                    </span>
-                                </div>
-                            <?php endif; ?>
-                            <?php if ($reg['attendance_marked']): ?>
-                                <div class="mt-1"><span class="badge badge-success">✅ Attended</span></div>
-                            <?php endif; ?>
-                        </div>
-                        <div class="card-footer">
-                            <a href="/event_detail.php?id=<?= $reg['event_id'] ?>" class="btn btn-secondary btn-sm">View
-                                Event</a>
-                            <a href="/student/ticket.php?reg_id=<?= $reg['reg_id'] ?>" class="btn btn-primary btn-sm">View
-                                Ticket</a>
+                            <div class="reg-card-actions">
+                                <a href="/event_detail.php?id=<?= $reg['event_id'] ?>" class="btn btn-secondary btn-sm">View Event</a>
+                                <a href="/student/ticket.php?reg_id=<?= $reg['reg_id'] ?>" class="btn btn-primary btn-sm">View Ticket</a>
+                            </div>
                         </div>
                     </div>
                 <?php endforeach; ?>
