@@ -85,7 +85,7 @@ require_once __DIR__ . '/../includes/header.php';
                     </thead>
                     <tbody>
                         <?php foreach ($events as $event): ?>
-                        <tr>
+                        <tr class="clickable-row" onclick="window.location='/organizer/event_detail.php?id=<?= $event['event_id'] ?>'">
                             <td><strong><?= sanitize($event['title']) ?></strong></td>
                             <td><?= $event['event_date'] ? formatDate($event['event_date']) : 'TBA' ?></td>
                             <td><span class="badge badge-accent"><?= sanitize($event['category_name']) ?></span></td>
@@ -103,7 +103,7 @@ require_once __DIR__ . '/../includes/header.php';
                                 <?php endif; ?>
                             </td>
                             <td>
-                                <div class="flex gap-1 flex-wrap">
+                                <div class="flex gap-1 flex-wrap" onclick="event.stopPropagation()">
                                     <a href="/organizer/manage_event.php?id=<?= $event['event_id'] ?>" class="btn btn-secondary btn-sm">Manage</a>
                                     <a href="/organizer/attendance.php?id=<?= $event['event_id'] ?>" class="btn btn-outline btn-sm">Attendance</a>
                                 </div>
