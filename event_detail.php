@@ -92,6 +92,13 @@ require_once __DIR__ . '/includes/header.php';
                     </div>
                 </div>
                 <?php endif; ?>
+                <div class="stat-card">
+                    <div class="stat-icon primary">💰</div>
+                    <div>
+                        <div class="stat-label">Registration Fee</div>
+                        <div style="font-weight:600"><?= ($event['registration_fee'] > 0) ? '₹' . number_format($event['registration_fee'], 2) : 'Free' ?></div>
+                    </div>
+                </div>
             </div>
 
             <?php if ($event['application_deadline']): ?>
@@ -129,29 +136,33 @@ require_once __DIR__ . '/includes/header.php';
                     <div class="alert alert-danger">This event is full.</div>
 
                 <?php elseif ($_SESSION['user_role'] === 'Student'): ?>
-                    <form method="POST" action="/student/register_event.php" class="flex gap-2 flex-wrap">
-                        <input type="hidden" name="event_id" value="<?= $event['event_id'] ?>">
-                        <button type="submit" name="type" value="Participant" class="btn btn-primary btn-lg">
+                    <div class="flex gap-2 flex-wrap">
+                        <a href="/student/register_preview.php?event_id=<?= $event['event_id'] ?>&type=Participant" class="btn btn-primary btn-lg">
                             Register as Participant
-                        </button>
+                        </a>
                         <?php if ($event['is_volunteer_required']): ?>
-                            <button type="submit" name="type" value="Volunteer" class="btn btn-outline btn-lg">
+                            <a href="/student/register_preview.php?event_id=<?= $event['event_id'] ?>&type=Volunteer" class="btn btn-outline btn-lg">
                                 Apply as Volunteer
-                            </button>
+                            </a>
                         <?php endif; ?>
-                    </form>
+                    </div>
                 <?php endif; ?>
             </div>
 
-            <?php if ($event['participant_whatsapp_link'] || $event['volunteer_whatsapp_link']): ?>
+            <?php
+                // Show WhatsApp link only to registered students, matching their type
+                $showParticipantWA = $isRegistered && $registration && $registration['type'] === 'Participant' && $event['participant_whatsapp_link'];
+                $showVolunteerWA   = $isRegistered && $registration && $registration['type'] === 'Volunteer' && $event['volunteer_whatsapp_link'];
+            ?>
+            <?php if ($showParticipantWA || $showVolunteerWA): ?>
                 <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--clr-border-light)">
-                    <h4 class="mb-2">WhatsApp Groups</h4>
+                    <h4 class="mb-2">💬 WhatsApp Group</h4>
                     <div class="flex gap-2 flex-wrap">
-                        <?php if ($event['participant_whatsapp_link']): ?>
-                            <a href="<?= sanitize($event['participant_whatsapp_link']) ?>" target="_blank" class="btn btn-success btn-sm">💬 Participant Group</a>
+                        <?php if ($showParticipantWA): ?>
+                            <a href="<?= sanitize($event['participant_whatsapp_link']) ?>" target="_blank" class="btn btn-success btn-sm">📱 Join Participant Group</a>
                         <?php endif; ?>
-                        <?php if ($event['volunteer_whatsapp_link']): ?>
-                            <a href="<?= sanitize($event['volunteer_whatsapp_link']) ?>" target="_blank" class="btn btn-success btn-sm">💬 Volunteer Group</a>
+                        <?php if ($showVolunteerWA): ?>
+                            <a href="<?= sanitize($event['volunteer_whatsapp_link']) ?>" target="_blank" class="btn btn-success btn-sm">📱 Join Volunteer Group</a>
                         <?php endif; ?>
                     </div>
                 </div>

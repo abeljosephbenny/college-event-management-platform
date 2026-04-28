@@ -41,6 +41,15 @@ if ($stmt->fetch()) {
     redirect("/event_detail.php?id=$eventId");
 }
 
+// Dual-registration check: cannot be both Participant and Volunteer
+$otherType = ($type === 'Participant') ? 'Volunteer' : 'Participant';
+$dualStmt = $pdo->prepare("SELECT reg_id FROM registrations WHERE user_id = ? AND event_id = ? AND type = ?");
+$dualStmt->execute([$userId, $eventId, $otherType]);
+if ($dualStmt->fetch()) {
+    setFlash('danger', "You are already registered as a $otherType. You cannot register as both a Participant and a Volunteer.");
+    redirect("/event_detail.php?id=$eventId");
+}
+
 // Check slots for participants
 if ($type === 'Participant' && $event['total_slots'] && $event['slots_left'] <= 0) {
     setFlash('danger', 'Sorry, this event is full.');
@@ -78,7 +87,7 @@ try {
     } else {
         setFlash('success', 'Successfully registered! Your ticket is ready.');
     }
-    redirect("/student/ticket.php?reg_id=$regId");
+    redirect("/student/register_success.php?reg_id=$regId");
 
 } catch (Exception $e) {
     $pdo->rollBack();
